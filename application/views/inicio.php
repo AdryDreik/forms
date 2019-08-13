@@ -102,7 +102,10 @@
                   label: 'Campo de texto',
                   type: 'textfield',
                   key: 'campo-texto',
-                  placeholder: 'Ingrese texto'
+                  placeholder: 'Ingrese texto',
+                  attributes: {
+                    id: 'uno'
+                  }
                 }
               },
               textArea: {
