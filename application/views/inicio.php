@@ -101,7 +101,8 @@
                 schema: {
                   label: 'Campo de texto',
                   type: 'textfield',
-                  key: 'campo-texto'
+                  key: 'campo-texto',
+                  placeholder: 'Ingrese texto'
                 }
               },
               textArea: {
@@ -111,7 +112,8 @@
                 schema: {
                   label: 'Parrafo',
                   type: 'textarea',
-                  key: 'parrafo'
+                  key: 'parrafo',
+                  placeholder: 'Ingrese algun parrafo'
                 }
               },
               number: {
@@ -121,7 +123,8 @@
                 schema: {
                   label: 'Campo numérico',
                   type: 'number',
-                  key: 'numerico'
+                  key: 'numerico',
+                  placeholder: 'Valor numérico'
                 }
               },
               dateField: {
@@ -131,7 +134,8 @@
                 schema: {
                   label: 'Fecha y hora',
                   type: 'datetime',
-                  key: 'fecha'
+                  key: 'fecha',
+                  placeholder: 'Ingrese una fecha'
                 }
               },
               select: {
@@ -140,8 +144,9 @@
                 icon: 'fa fa-terminal',
                 schema: {
                   label: 'Lista opciones',
-                  type: 'datetime',
-                  key: 'select'
+                  type: 'select',
+                  key: 'select',
+                  placeholder: 'Seleccione una opción'
                 }
               },
               radio: {
@@ -169,6 +174,14 @@
         },
         editForm: {
           textfield: [
+            {
+              key: 'display',
+              components: [{
+                label: {
+                  ignore: true
+                }
+              }]
+            },
             {
               key: 'api',
               ignore: true
@@ -329,6 +342,24 @@
             },
             {
               key: 'data',
+              ignore: true
+            },
+            {
+              key: 'conditional',
+              ignore: true
+            },
+            {
+              key: 'logic',
+              ignore: true
+            },
+            {
+              key: 'layout',
+              ignore: true
+            }
+          ],
+          select: [
+            {
+              key: 'api',
               ignore: true
             },
             {
