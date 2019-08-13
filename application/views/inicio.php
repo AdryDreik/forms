@@ -175,14 +175,6 @@
         editForm: {
           textfield: [
             {
-              key: 'display',
-              components: [{
-                label: {
-                  ignore: true
-                }
-              }]
-            },
-            {
               key: 'api',
               ignore: true
             },
@@ -196,10 +188,6 @@
             },
             {
               key: 'logic',
-              ignore: true
-            },
-            {
-              key: 'layout',
               ignore: true
             }
           ],
@@ -219,10 +207,6 @@
             {
               key: 'logic',
               ignore: true
-            },
-            {
-              key: 'layout',
-              ignore: true
             }
           ],
           email: [
@@ -240,10 +224,6 @@
             },
             {
               key: 'logic',
-              ignore: true
-            },
-            {
-              key: 'layout',
               ignore: true
             }
           ],
@@ -263,10 +243,6 @@
             {
               key: 'logic',
               ignore: true
-            },
-            {
-              key: 'layout',
-              ignore: true
             }
           ],
           number: [
@@ -284,10 +260,6 @@
             },
             {
               key: 'logic',
-              ignore: true
-            },
-            {
-              key: 'layout',
               ignore: true
             }
           ],
@@ -307,10 +279,6 @@
             {
               key: 'logic',
               ignore: true
-            },
-            {
-              key: 'layout',
-              ignore: true
             }
           ],
           radio: [
@@ -328,10 +296,6 @@
             },
             {
               key: 'logic',
-              ignore: true
-            },
-            {
-              key: 'layout',
               ignore: true
             }
           ],
@@ -351,10 +315,6 @@
             {
               key: 'logic',
               ignore: true
-            },
-            {
-              key: 'layout',
-              ignore: true
             }
           ],
           select: [
@@ -368,10 +328,6 @@
             },
             {
               key: 'logic',
-              ignore: true
-            },
-            {
-              key: 'layout',
               ignore: true
             }
           ]
