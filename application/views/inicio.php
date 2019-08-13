@@ -43,6 +43,8 @@
       Conditional: 'Condicionales',
       Logic: 'Logica',
       Layout: 'Marco',
+      Date: 'Fecha',
+      Time: 'Hora',
       minLength: 'Faltan caracteres para {{field}}',
       maxLength: '{{field}} excede la cantidad permitida de caracteres',
       'Enter your email address': 'Ingrese su dirección de correo electrónico',
@@ -75,17 +77,93 @@
         builder: {
           basic: false,
           advanced: false,
-          layout: false,
           data: false,
-          customBasic: {
+          layout: false,
+          custom: {
             title: 'Campos de formulario',
-            default: true,
             weight: 0,
             components: {
-              textfield: true,
-              textarea: true,
-              email: true,
-              phoneNumber: true
+              header: {
+                title: 'Título',
+                key: 'titulo',
+                icon: 'fa fa-terminal',
+                schema: {
+                  label: 'Título',
+                  type: 'htmlelement',
+                  key: 'titulo',
+                  content: '<h1>Título</h1>'
+                }
+              },
+              textField: {
+                title: 'Campo de texto',
+                key: 'campo-texto',
+                icon: 'fa fa-terminal',
+                schema: {
+                  label: 'Campo de texto',
+                  type: 'textfield',
+                  key: 'campo-texto'
+                }
+              },
+              textArea: {
+                title: 'Parrafo',
+                key: 'parrafo',
+                icon: 'fa fa-terminal',
+                schema: {
+                  label: 'Parrafo',
+                  type: 'textarea',
+                  key: 'parrafo'
+                }
+              },
+              number: {
+                title: 'Numérico',
+                key: 'numerico',
+                icon: 'fa fa-terminal',
+                schema: {
+                  label: 'Campo numérico',
+                  type: 'number',
+                  key: 'numerico'
+                }
+              },
+              dateField: {
+                title: 'Fecha',
+                key: 'fecha',
+                icon: 'fa fa-terminal',
+                schema: {
+                  label: 'Fecha y hora',
+                  type: 'datetime',
+                  key: 'fecha'
+                }
+              },
+              select: {
+                title: 'Lista desplegable',
+                key: 'select',
+                icon: 'fa fa-terminal',
+                schema: {
+                  label: 'Lista opciones',
+                  type: 'datetime',
+                  key: 'select'
+                }
+              },
+              radio: {
+                title: 'Opciones',
+                key: 'radio',
+                icon: 'fa fa-terminal',
+                schema: {
+                  label: 'Opciones excluyentes',
+                  type: 'radio',
+                  key: 'radio'
+                }
+              },
+              selectboxes: {
+                title: 'Selección multiple',
+                key: 'seleccion-multiple',
+                icon: 'fa fa-terminal',
+                schema: {
+                  label: 'Selección multiple',
+                  type: 'selectboxes',
+                  key: 'seleccion-multiple'
+                }
+              }
             }
           }
         },
@@ -134,6 +212,138 @@
               ignore: true
             }
           ],
+          email: [
+            {
+              key: 'api',
+              ignore: true
+            },
+            {
+              key: 'data',
+              ignore: true
+            },
+            {
+              key: 'conditional',
+              ignore: true
+            },
+            {
+              key: 'logic',
+              ignore: true
+            },
+            {
+              key: 'layout',
+              ignore: true
+            }
+          ],
+          htmlelement: [
+            {
+              key: 'api',
+              ignore: true
+            },
+            {
+              key: 'data',
+              ignore: true
+            },
+            {
+              key: 'conditional',
+              ignore: true
+            },
+            {
+              key: 'logic',
+              ignore: true
+            },
+            {
+              key: 'layout',
+              ignore: true
+            }
+          ],
+          number: [
+            {
+              key: 'api',
+              ignore: true
+            },
+            {
+              key: 'data',
+              ignore: true
+            },
+            {
+              key: 'conditional',
+              ignore: true
+            },
+            {
+              key: 'logic',
+              ignore: true
+            },
+            {
+              key: 'layout',
+              ignore: true
+            }
+          ],
+          datetime: [
+            {
+              key: 'api',
+              ignore: true
+            },
+            {
+              key: 'data',
+              ignore: true
+            },
+            {
+              key: 'conditional',
+              ignore: true
+            },
+            {
+              key: 'logic',
+              ignore: true
+            },
+            {
+              key: 'layout',
+              ignore: true
+            }
+          ],
+          radio: [
+            {
+              key: 'api',
+              ignore: true
+            },
+            {
+              key: 'data',
+              ignore: true
+            },
+            {
+              key: 'conditional',
+              ignore: true
+            },
+            {
+              key: 'logic',
+              ignore: true
+            },
+            {
+              key: 'layout',
+              ignore: true
+            }
+          ],
+          selectboxes: [
+            {
+              key: 'api',
+              ignore: true
+            },
+            {
+              key: 'data',
+              ignore: true
+            },
+            {
+              key: 'conditional',
+              ignore: true
+            },
+            {
+              key: 'logic',
+              ignore: true
+            },
+            {
+              key: 'layout',
+              ignore: true
+            }
+          ]
         }
       }).then(function(builder) {
         builder.on('saveComponent', function() {
