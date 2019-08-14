@@ -18,7 +18,7 @@
 <body>
   <div id="builder"></div>
   <div id="formio"></div>
-  <a href="<?php echo(base_url()) ?>formulario_controller/guardarFormulario">Guardar</a>
+  <a href="<?php echo(base_url())?>index.php/formulario/guardar">Guardar</a>
   <script type="text/javascript" src="<?php echo base_url('public/js/formio.full.min.js')?>"></script>
   <script type="text/javascript" src="<?php echo base_url('public/js/leaflet.js')?>"></script>
   <script>
@@ -364,8 +364,11 @@
         builder.on('saveComponent', function() {
           console.log(builder.schema);
         });
-        builder.on('submit', function() {
-          return fetch()
+        builder.on('submit', function(submission) {
+          console.log('-----------EEEEEEEe-------------------------');
+          console.log(submission);
+          console.log('------------------------------------');
+          builder.emit('submitDone', submission);
         });
       });
       // Formio.createForm(document.getElementById('formio'), 'https://examples.form.io/example');

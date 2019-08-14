@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Formulario_controller extends CI_Controller {
+class Formulario extends CI_Controller {
 
   public function __construct()
   {
@@ -8,11 +8,12 @@ class Formulario_controller extends CI_Controller {
     $this->load->model('formulario_model');
   }
 
-  public function guardarFormulario ($data) {
-    print_r($data);
-  }
 	public function index()
 	{
-		$this->load->view('inicio');
-	}
+    $this->load->view('inicio');
+  }
+  
+  function guardar () {
+    print_r([]);
+  }
 }
