@@ -368,7 +368,21 @@
           console.log('-----------EEEEEEEe-------------------------');
           console.log(submission);
           console.log('------------------------------------');
-          builder.emit('submitDone', submission);
+          const data = {
+            adrian: 'example'
+          };
+          return fetch("<?= base_url() ?>index.php/formulario/guardar", {
+            body: JSON.stringify(data),
+            headers: {
+              'content-type': 'application/json'
+            },
+            method: 'POST',
+            mode: 'cors',
+          })
+          .then(response => {
+            builder.emit('submitDone', submission)
+            response.json()
+          })
         });
       });
       // Formio.createForm(document.getElementById('formio'), 'https://examples.form.io/example');
