@@ -38,7 +38,7 @@
 |
 */
 
-$route['default_controller'] = "formularios";
+$route['default_controller'] = "formulario_controller";
 $route['404_override'] = '';
 
 

@@ -18,6 +18,7 @@
 <body>
   <div id="builder"></div>
   <div id="formio"></div>
+  <a href="<?php echo(base_url()) ?>formulario_controller/guardarFormulario">Guardar</a>
   <script type="text/javascript" src="<?php echo base_url('public/js/formio.full.min.js')?>"></script>
   <script type="text/javascript" src="<?php echo base_url('public/js/leaflet.js')?>"></script>
   <script>
@@ -320,6 +321,28 @@
               ignore: true
             }
           ],
+          button: [
+            {
+              key: 'api',
+              ignore: true
+            },
+            {
+              key: 'data',
+              ignore: true
+            },
+            {
+              key: 'conditional',
+              ignore: true
+            },
+            {
+              key: 'logic',
+              ignore: true
+            },
+            {
+              key: 'layout',
+              ignore: true
+            }
+          ],
           select: [
             {
               key: 'api',
@@ -336,8 +359,13 @@
           ]
         }
       }).then(function(builder) {
+        // Evita que el envío vaya al servidor
+        builder.nosubmit = true;
         builder.on('saveComponent', function() {
           console.log(builder.schema);
+        });
+        builder.on('submit', function() {
+          return fetch()
         });
       });
       // Formio.createForm(document.getElementById('formio'), 'https://examples.form.io/example');
