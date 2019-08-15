@@ -395,7 +395,7 @@
         builder.on('saveComponent', () => {
           console.log(builder.schema);
         });
-        builder.on('submit', (submission) =>{
+        builder.on('submit', (submission) => {
           const formData = new FormData();
           formData.append('json', JSON.stringify(submission));
           formData.append('builder', JSON.stringify(builder.components.map(item => item.component)));
