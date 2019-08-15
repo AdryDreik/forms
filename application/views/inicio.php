@@ -95,7 +95,6 @@
               header: {
                 title: 'Título',
                 key: 'titulo',
-                icon: 'fa fa-terminal',
                 schema: {
                   label: 'Título',
                   type: 'htmlelement',
@@ -106,7 +105,6 @@
               textField: {
                 title: 'Campo de texto',
                 key: 'campo-texto',
-                icon: 'fa fa-terminal',
                 schema: {
                   label: 'Campo de texto',
                   type: 'textfield',
@@ -120,7 +118,6 @@
               password: {
                 title: 'Contraseña',
                 key: 'contrasenia',
-                icon: 'fa fa-terminal',
                 schema: {
                   label: 'Contraseña',
                   type: 'password',
@@ -134,7 +131,6 @@
               textArea: {
                 title: 'Parrafo',
                 key: 'parrafo',
-                icon: 'fa fa-terminal',
                 schema: {
                   label: 'Parrafo',
                   type: 'textarea',
@@ -145,7 +141,6 @@
               number: {
                 title: 'Numérico',
                 key: 'numerico',
-                icon: 'fa fa-terminal',
                 schema: {
                   label: 'Campo numérico',
                   type: 'number',
@@ -156,7 +151,6 @@
               dateField: {
                 title: 'Fecha',
                 key: 'fecha',
-                icon: 'fa fa-terminal',
                 schema: {
                   label: 'Fecha y hora',
                   type: 'datetime',
@@ -167,7 +161,6 @@
               select: {
                 title: 'Lista desplegable',
                 key: 'select',
-                icon: 'fa fa-terminal',
                 schema: {
                   label: 'Lista opciones',
                   type: 'select',
@@ -178,7 +171,6 @@
               radio: {
                 title: 'Opciones',
                 key: 'radio',
-                icon: 'fa fa-terminal',
                 schema: {
                   label: 'Opciones excluyentes',
                   type: 'radio',
@@ -188,7 +180,6 @@
               selectboxes: {
                 title: 'Selección multiple',
                 key: 'seleccion-multiple',
-                icon: 'fa fa-terminal',
                 schema: {
                   label: 'Selección multiple',
                   type: 'selectboxes',
