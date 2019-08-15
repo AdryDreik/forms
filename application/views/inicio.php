@@ -9,7 +9,6 @@
   <link rel="stylesheet" href="<?php echo base_url('public/css/formio.full.min.css')?>">
   <link rel="stylesheet" href="<?php echo base_url('public/css/bootstrap.min.css')?>">
   <link rel="stylesheet" href="<?php echo base_url('public/css/font-awesome.min.css')?>">
-  <script type="text/javascript" src="<?php echo base_url('public/js/formio.full.min.js')?>"></script>
   <style type="text/css">
     #map {
       height: 400px;
@@ -24,6 +23,7 @@
 <body>
   <div id="builder"></div>
   <div id="formio"></div>
+  <script type="text/javascript" src="<?php echo base_url('public/js/formio.full.min.js')?>"></script>
   <script type="text/javascript" src="<?php echo base_url('public/js/leaflet.js')?>"></script>
   <script
   src="https://code.jquery.com/jquery-1.10.0.min.js"
@@ -117,6 +117,20 @@
                   }
                 }
               },
+              password: {
+                title: 'Contraseña',
+                key: 'contrasenia',
+                icon: 'fa fa-terminal',
+                schema: {
+                  label: 'Contraseña',
+                  type: 'password',
+                  key: 'contrasenia',
+                  placeholder: 'Ingrese contraseña',
+                  attributes: {
+                    id: 'uno'
+                  }
+                }
+              },
               textArea: {
                 title: 'Parrafo',
                 key: 'parrafo',
@@ -186,6 +200,24 @@
         },
         editForm: {
           textfield: [
+            {
+              key: 'api',
+              ignore: true
+            },
+            {
+              key: 'data',
+              ignore: true
+            },
+            {
+              key: 'conditional',
+              ignore: true
+            },
+            {
+              key: 'logic',
+              ignore: true
+            }
+          ],
+          password: [
             {
               key: 'api',
               ignore: true
