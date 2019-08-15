@@ -18,9 +18,12 @@
 <body>
   <div id="builder"></div>
   <div id="formio"></div>
-  <a href="<?php echo(base_url())?>formulario/guardar">Guardar</a>
   <script type="text/javascript" src="<?php echo base_url('public/js/formio.full.min.js')?>"></script>
   <script type="text/javascript" src="<?php echo base_url('public/js/leaflet.js')?>"></script>
+  <script
+  src="https://code.jquery.com/jquery-1.10.0.min.js"
+  integrity="sha256-2+LznWeWgL7AJ1ciaIG5rFP7GKemzzl+K75tRyTByOE="
+  crossorigin="anonymous"></script>
   <script>
     const espaniol = {
       Submit: 'Enviar',
@@ -365,24 +368,36 @@
           console.log(builder.schema);
         });
         builder.on('submit', function(submission) {
-          console.log('-----------EEEEEEEe-------------------------');
-          console.log(submission);
-          console.log('------------------------------------');
-          const data = {
-            adrian: 'example'
-          };
-          return fetch("<?= base_url() ?>index.php/formulario/guardar", {
-            body: JSON.stringify(data),
-            headers: {
-              'content-type': 'application/json'
-            },
-            method: 'POST',
-            mode: 'cors',
-          })
-          .then(response => {
-            builder.emit('submitDone', submission)
-            response.json()
-          })
+          const formData = new FormData();
+          formData.append('json', JSON.stringify(submission));
+          formData.append('name', 'adrian');
+          $.ajax({
+            type : "POST",
+            url : "<?php echo site_url('formulario/guardar')?>",
+            cache: false,
+            processData: false,
+            contentType: false,
+            data : formData,
+            success: function(data){
+              console.log('-----------DATAAAAAAAAA-------------------------');
+              console.log(data);
+              console.log('------------------------------------');
+              builder.emit('submitDone', submission);
+            }
+          });
+
+          // return fetch("<?= site_url('formulario/guardar') ?>", {
+          //   body: formData,
+          //   headers: {
+          //     'Content-Type': 'application/x-www-form-urlencoded',
+          //     'Accept': 'application/json'
+          //   },
+          //   method: 'POST'
+          // })
+          // .then(response => {
+          //   builder.emit('submitDone', submission)
+          //   response.json()
+          // })
         });
       });
       // Formio.createForm(document.getElementById('formio'), 'https://examples.form.io/example');
