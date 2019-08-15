@@ -18,7 +18,7 @@
 <body>
   <div id="builder"></div>
   <div id="formio"></div>
-  <a href="<?php echo(base_url())?>index.php/formulario/guardar">Guardar</a>
+  <a href="<?php echo(base_url())?>formulario/guardar">Guardar</a>
   <script type="text/javascript" src="<?php echo base_url('public/js/formio.full.min.js')?>"></script>
   <script type="text/javascript" src="<?php echo base_url('public/js/leaflet.js')?>"></script>
   <script>

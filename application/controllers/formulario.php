@@ -15,6 +15,5 @@ class Formulario extends CI_Controller {
   
   function guardar () {
     echo 'holaaaaaa';
-    print_r($this->input->post('adrian', TRUE));
   }
 }
