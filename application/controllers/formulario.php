@@ -14,7 +14,7 @@ class Formulario extends CI_Controller {
   }
   
   function guardar () {
-    echo($this->input->post('json'));
+    echo($this->input->post('builder'));
     // $this->output->enable_profile(); 
   }
 }

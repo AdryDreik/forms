@@ -8,17 +8,22 @@
   <link rel="stylesheet" href="<?php echo base_url('public/css/leaflet.css')?>">
   <link rel="stylesheet" href="<?php echo base_url('public/css/formio.full.min.css')?>">
   <link rel="stylesheet" href="<?php echo base_url('public/css/bootstrap.min.css')?>">
+  <link rel="stylesheet" href="<?php echo base_url('public/css/font-awesome.min.css')?>">
+  <script type="text/javascript" src="<?php echo base_url('public/js/formio.full.min.js')?>"></script>
   <style type="text/css">
     #map {
       height: 400px;
       width: 100%;
+    }
+    body {
+      padding: 20px;
+      margin: 0
     }
   </style>
 </head>
 <body>
   <div id="builder"></div>
   <div id="formio"></div>
-  <script type="text/javascript" src="<?php echo base_url('public/js/formio.full.min.js')?>"></script>
   <script type="text/javascript" src="<?php echo base_url('public/js/leaflet.js')?>"></script>
   <script
   src="https://code.jquery.com/jquery-1.10.0.min.js"
@@ -364,13 +369,13 @@
       }).then(function(builder) {
         // Evita que el envío vaya al servidor
         builder.nosubmit = true;
-        builder.on('saveComponent', function() {
+        builder.on('saveComponent', () => {
           console.log(builder.schema);
         });
-        builder.on('submit', function(submission) {
+        builder.on('submit', (submission) =>{
           const formData = new FormData();
           formData.append('json', JSON.stringify(submission));
-          formData.append('name', 'adrian');
+          formData.append('builder', JSON.stringify(builder.components.map(item => item.component)));
           $.ajax({
             type : "POST",
             url : "<?php echo site_url('formulario/guardar')?>",
@@ -378,26 +383,10 @@
             processData: false,
             contentType: false,
             data : formData,
-            success: function(data){
-              console.log('-----------DATAAAAAAAAA-------------------------');
-              console.log(data);
-              console.log('------------------------------------');
+            success: (data) => {
               builder.emit('submitDone', submission);
             }
           });
-
-          // return fetch("<?= site_url('formulario/guardar') ?>", {
-          //   body: formData,
-          //   headers: {
-          //     'Content-Type': 'application/x-www-form-urlencoded',
-          //     'Accept': 'application/json'
-          //   },
-          //   method: 'POST'
-          // })
-          // .then(response => {
-          //   builder.emit('submitDone', submission)
-          //   response.json()
-          // })
         });
       });
       // Formio.createForm(document.getElementById('formio'), 'https://examples.form.io/example');
