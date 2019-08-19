@@ -23,6 +23,7 @@
 <body>
   <div id="builder"></div>
   <div id="formio"></div>
+  <div id="formio2">< {},/div>
   <script type="text/javascript" src="<?php echo base_url('public/js/formio.full.min.js')?>"></script>
   <script type="text/javascript" src="<?php echo base_url('public/js/leaflet.js')?>"></script>
   <script src="https://code.jquery.com/jquery-1.10.0.min.js" integrity="sha256-2+LznWeWgL7AJ1ciaIG5rFP7GKemzzl+K75tRyTByOE=" crossorigin="anonymous"></script>
@@ -40,6 +41,12 @@
             name: object.attributes ? object.attributes.name : ''
           };
           switch (object.type) {
+            case 'htmlelement':
+              resolve(Object.assign(settings, {
+                form_id: formId,
+                type: 'header'
+              }));
+              break;
             case 'textfield':
               resolve(Object.assign(settings, {
                 form_id: formId,
@@ -47,7 +54,29 @@
                 placeholder: object.placeholder,
                 defaultValue: object.defaultValue,
                 subtype: 'text',
-                maxlength: object.validate ? object.validate.maxLength : 10,
+                maxlength: object.validate ? object.validate.maxLength : 100,
+                className: object.customClass
+              }));
+              break;
+            case 'password':
+              resolve(Object.assign(settings, {
+                form_id: formId,
+                type: 'text',
+                placeholder: object.placeholder,
+                defaultValue: object.defaultValue,
+                subtype: 'password',
+                maxlength: object.validate ? object.validate.maxLength : 100,
+                className: object.customClass
+              }));
+              break;
+            case 'email':
+              resolve(Object.assign(settings, {
+                form_id: formId,
+                type: 'text',
+                placeholder: object.placeholder,
+                defaultValue: object.defaultValue,
+                subtype: 'email',
+                maxlength: object.validate ? object.validate.maxLength : 100,
                 className: object.customClass
               }));
               break;
@@ -182,7 +211,9 @@
       }
     }
     window.onload = () => {
-      Formio.builder(document.getElementById('builder'), {}, {
+      Formio.builder(document.getElementById('builder'), {
+        components: []
+      }, {
         reandOnly: false,
         language: 'es',
         i18n: {
@@ -229,7 +260,20 @@
                   key: 'contrasenia',
                   placeholder: 'Ingrese contraseña',
                   attributes: {
-                    id: 'uno'
+                    id: 'dos'
+                  }
+                }
+              },
+              email: {
+                title: 'Correo electronico',
+                key: 'email',
+                schema: {
+                  label: 'Correo electronico',
+                  type: 'email',
+                  key: 'email',
+                  placeholder: 'Ingrese un correo electronico',
+                  attributes: {
+                    id: 'tres'
                   }
                 }
               },
@@ -316,6 +360,24 @@
             }
           ],
           password: [
+            {
+              key: 'api',
+              ignore: true
+            },
+            {
+              key: 'data',
+              ignore: true
+            },
+            {
+              key: 'conditional',
+              ignore: true
+            },
+            {
+              key: 'logic',
+              ignore: true
+            }
+          ],
+          email: [
             {
               key: 'api',
               ignore: true
@@ -503,10 +565,13 @@
           console.log(builder.schema);
         });
         builder.on('submit', (datos) => {
+          console.log('------------------------------------');
+          console.log(JSON.stringify(builder.components.map(item => item.component)));
+          console.log('------------------------------------');
           generateJSON(datos.data, builder.components.map(item => item.component))
             .then((res) => {
               const formData = new FormData();
-              formData.append('formio', JSON.stringify(datos));
+              formData.append('data', JSON.stringify(datos));
               formData.append('formatted', JSON.stringify(res));
               formData.append('builder', JSON.stringify(builder.components.map(item => item.component)));
               $.ajax({
@@ -524,6 +589,15 @@
         });
       });
       // Formio.createForm(document.getElementById('formio'), 'https://examples.form.io/example');
+        Formio.createForm(document.getElementById('formio2'), {
+          components: []
+        }).then((form) => {
+          form.nosubmit = true;
+          form.on('submit', function(submission) {
+            console.log(submission);
+            form.emit('submitDone', true);
+          });
+        })
     };
   	</script>
 </body>
