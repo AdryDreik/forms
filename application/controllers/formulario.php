@@ -18,8 +18,7 @@ class Formulario extends CI_Controller {
 	{
     $data['idFormulario'] = $this->formulario_model->crearFormulario();
     $data['formularios'] = $this->formulario_model->listadoFormularios();
-    $data['componentes'] = array();
-    var_dump($data['componentes']);
+    $data['componentes'] = json_encode(array());
     $this->load->view('formularios', $data);
   }
 
@@ -31,7 +30,7 @@ class Formulario extends CI_Controller {
     if (isset($builder[0]->builder)) {
       $data['componentes'] = $builder[0]->builder;
     } else {
-      $data['componentes'] = array();
+      $data['componentes'] = json_encode(array());
     }
     $this->load->view('formularios', $data);
   }

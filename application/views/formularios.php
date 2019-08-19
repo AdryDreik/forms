@@ -31,10 +31,7 @@
   <script src="https://code.jquery.com/jquery-1.10.0.min.js" integrity="sha256-2+LznWeWgL7AJ1ciaIG5rFP7GKemzzl+K75tRyTByOE=" crossorigin="anonymous"></script>
   <script>
     const formId = <?=$idFormulario;?>;
-    const builderDB = [<?=$componentes;?>] ? [<?=$componentes;?>][0] : [];
-    console.log(`====================_MENSAJE_A_MOSTRARSE_====================`);
-    console.log(builderDB);
-    console.log(`====================_MENSAJE_A_MOSTRARSE_====================`);
+    const builderDB = <?=$componentes;?>;
     const keys = (object) => {
       return new Promise((resolve, reject) => {
         try {
