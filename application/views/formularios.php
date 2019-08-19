@@ -18,6 +18,65 @@
       padding: 20px;
       margin: 0
     }
+    .row {
+      margin:0;
+    }
+    .formio-component-hideLabel,
+    .formio-component-widget.type,
+    .formio-component-description,
+    .formio-component-errorLabel,
+    .formio-component-errorMask,
+    .formio-component-inputMask,
+    .formio-component-allowMultipleMasks,
+    .formio-component-prefix,
+    .formio-component-suffix,
+    .formio-component-tabindex,
+    .formio-component-persistent,
+    .formio-component-showWordCount,
+    .formio-component-showCharCount,
+    .formio-component-multiple,
+    .formio-component-clearOnHide,
+    .formio-component-protected,
+    .formio-component-hidden,
+    .formio-component-mask,
+    .formio-component-autofocus,
+    .formio-component-tableView,
+    .formio-component-alwaysEnabled,
+    .formio-component-unique,
+    .formio-component-validate.pattern,
+    .formio-component-validateOn,
+    .formio-component-editor,
+    .formio-component-useLocaleSettings,
+    .formio-component-useLocaleSettings + div,
+    .formio-component-editor + div,
+    .formio-component-editor + div + div,
+    .formio-component-labelMargin + div,
+    .formio-component-dataSrc,
+    .formio-component-template,
+    .formio-component-customOptions,
+    .formio-component-selectThreshold,
+    .formio-component-defaultValue,
+    .formio-component-readOnlyValue,
+    .formio-component-refreshOn,
+    .formio-component-clearOnRefresh,
+    .formio-component-clearOnRefresh + div,
+    .formio-component-clearOnRefresh + div + div,
+    .formio-component-clearOnRefresh + div + div + div,
+    .formio-component-clearOnRefresh + div + div + div + div,
+    .formio-component-clearOnRefresh + div + div + div + div + div,
+    .formio-component-labelPosition{
+      display: none;
+    }
+
+    div[class*='.minWords'],
+    div[class*='.maxWords'],
+    div[class*='.pattern'],
+    div[class*='.customMessage'],
+    div[class*='.customMessage'] + div,
+    div[class*='.customMessage'] + div + div
+    {
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -184,6 +243,7 @@
       Data: 'Datos',
       Validation: 'Validaciones',
       API: 'API',
+      Tooltip: 'Description',
       Conditional: 'Condicionales',
       Logic: 'Logica',
       Layout: 'Marco',
@@ -191,6 +251,8 @@
       Time: 'Hora',
       minLength: 'Faltan caracteres para {{field}}',
       maxLength: '{{field}} excede la cantidad permitida de caracteres',
+      'Custom CSS Class': 'ClassName',
+      'To add a tooltip to this field, enter text here.': 'Desea agregar alguna descripción',
       'Enter your email address': 'Ingrese su dirección de correo electrónico',
       'Enter your first name': 'Ponga su primer nombre',
       'Drag and Drop a form component': 'Arrastra y suelta en esta sección un campo de formulario',
@@ -343,6 +405,10 @@
         },
         editForm: {
           textfield: [
+            {
+              key: 'display',
+              ignore: false
+            },
             {
               key: 'api',
               ignore: true
