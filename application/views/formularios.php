@@ -21,7 +21,6 @@
   </style>
 </head>
 <body>
-  <a class="btn btn-primary" href="<?=site_url('formulario/crear')?>">Crear nuevo formulario</a>
   <a class="btn btn-primary" href="<?=site_url('formulario')?>">Volver</a>
   <div id="builder"></div>
   <div id="formio"></div>

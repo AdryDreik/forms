@@ -57,12 +57,7 @@ class Formulario_model extends CI_Model {
 
   public function crearFormulario ($formulario) {
     try {
-      $formulario = array(
-        'nombre' => 'Formuario Nuevo',
-        'descripcion' => 'Descripcion del formulario',
-        'publicado' => false,
-      );
-      $this->db->query("insert into formulario (nombre, descripcion, publicado) values ('Formulario Nuevo', 'Descripcion del formulario', false);");
+      $this->db->query("insert into formulario (nombre, descripcion, publicado) values ('".$formulario['nombre']."', '".$formulario['descripcion']."', ".$formulario['publicado'].");");
       $insert_id = $this->db->insert_id();
       return  $insert_id;
     } catch (Exception $e) {

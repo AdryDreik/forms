@@ -16,7 +16,12 @@ class Formulario extends CI_Controller {
 
 	public function crear()
 	{
-    $data['idFormulario'] = $this->formulario_model->crearFormulario();
+    $formulario = array(
+      'nombre' => $this->input->post('nombre'),
+      'descripcion' => $this->input->post('descripcion'),
+      'publicado' => 0
+    );
+    $data['idFormulario'] = $this->formulario_model->crearFormulario($formulario);
     $data['formularios'] = $this->formulario_model->listadoFormularios();
     $data['componentes'] = json_encode(array());
     $this->load->view('formularios', $data);

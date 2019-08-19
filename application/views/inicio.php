@@ -21,20 +21,20 @@
     </style>
   </head>
   <body>
-    <a class="btn btn-primary" id="nuevoForm">Crear nuevo Formulario</a>
+    <a class="btn btn-success" id="nuevoForm">Crear nuevo Formulario</a>
     <form id="formCreacion" action="<?=site_url('formulario/crear')?>" method="POST">
       <div class="input-group input-group-lg">
         <div class="input-group-prepend">
           <span class="input-group-text" id="inputGroup-sizing-lg">Nombre</span>
         </div>
-        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+        <input type="text" class="form-control" name="nombre" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
       </div><div class="input-group input-group-lg">
       <div class="input-group-prepend">
         <span class="input-group-text" id="inputGroup-sizing-lg">Descripcion</span>
       </div>
-      <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+      <input type="text" class="form-control" name="descripcion" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
     </div>
-    <a class="btn btn-primary" type="submit">Crear nuevo formulario</a>
+    <button class="btn btn-success" type="submit">Guardar</button>
   </form>
   <table class="table">
     <thead>
