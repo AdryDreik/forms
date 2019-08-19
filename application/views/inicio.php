@@ -25,11 +25,116 @@
   <div id="formio"></div>
   <script type="text/javascript" src="<?php echo base_url('public/js/formio.full.min.js')?>"></script>
   <script type="text/javascript" src="<?php echo base_url('public/js/leaflet.js')?>"></script>
-  <script
-  src="https://code.jquery.com/jquery-1.10.0.min.js"
-  integrity="sha256-2+LznWeWgL7AJ1ciaIG5rFP7GKemzzl+K75tRyTByOE="
-  crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-1.10.0.min.js" integrity="sha256-2+LznWeWgL7AJ1ciaIG5rFP7GKemzzl+K75tRyTByOE=" crossorigin="anonymous"></script>
   <script>
+
+    const formId = 1;
+    const keys = (object) => {
+      return new Promise((resolve, reject) => {
+        try {
+          const settings = {
+            readonly: object.disabled,
+            required: object.validate.required,
+            label: object.label,
+            description: object.tooltip,
+            name: object.attributes ? object.attributes.name : ''
+          };
+          switch (object.type) {
+            case 'textfield':
+              resolve(Object.assign(settings, {
+                form_id: formId,
+                type: 'text',
+                placeholder: object.placeholder,
+                defaultValue: object.defaultValue,
+                subtype: 'text',
+                maxlength: object.validate ? object.validate.maxLength : 10,
+                className: object.customClass
+              }));
+              break;
+            case 'number':
+              resolve(Object.assign(settings, {
+                form_id: formId,
+                type: 'number',
+                placeholder: object.placeholder,
+                defaultValue: object.defaultValue,
+                max: object.validate ? object.validate.max : 10,
+                min: object.validate ? object.validate.min : 1,
+                className: object.customClass
+              }));
+              break;
+            case 'datetime':
+              resolve(Object.assign(settings, {
+                form_id: formId,
+                type: 'date',
+                subtype: object.format === 'dd/MM/yyyy' ? 'date' : 'time',
+                placeholder: object.placeholder,
+                defaultValue: object.defaultValue
+              }));
+              break;
+            case 'select':
+              resolve(Object.assign(settings, {
+                form_id: formId,
+                type: 'select',
+                placeholder: object.placeholder,
+                values: object.data ? object.data.json : []
+              }));
+              break;
+            case 'radio':
+              resolve(Object.assign(settings, {
+                form_id: formId,
+                type: 'radio-group',
+                description: object.tooltip,
+                values: object.values
+              }));
+              break;
+            case 'selectboxes':
+              resolve(Object.assign(settings, {
+                form_id: formId,
+                type: 'checkbox-group',
+                values: object.values
+              }));
+              break;
+            case 'textarea':
+              resolve(Object.assign(settings, {
+                form_id: formId,
+                type: 'textarea',
+                subtype: 'textarea',
+                placeholder: object.placeholder,
+                rows: object.rows,
+                maxlength: object.validate ? object.validate.maxLength : 250
+              }));
+              break;
+          }
+        } catch (err) {
+          reject(err.message);
+        }
+      })
+    }
+    const generateJSON = (data, json) => {
+      return new Promise((resolve, reject) => {
+        try {
+          const promises = [];
+          for (let component of json.filter(item => item.type !== 'button')) {
+            promises.push(keys(component));
+          }
+          Promise.all(promises)
+            .then(response => {
+              const sendData = {
+                codigo_registro: 10,
+                form_id: formId,
+                form_detalle: 'Formulario A',
+                tipo_bandeja: 1,
+                lista_elementos: response 
+              }
+              resolve(sendData);
+            });
+
+        } catch (err) {
+          reject(err);
+        }
+      })
+    }
+
     const espaniol = {
       Submit: 'Enviar',
       Language: 'Idioma',
@@ -155,6 +260,8 @@
                   label: 'Fecha y hora',
                   type: 'datetime',
                   key: 'fecha',
+                  // format: 'dd/MM/yyyy',
+                  enableTime: false,
                   placeholder: 'Ingrese una fecha'
                 }
               },
@@ -395,21 +502,25 @@
         builder.on('saveComponent', () => {
           console.log(builder.schema);
         });
-        builder.on('submit', (submission) => {
-          const formData = new FormData();
-          formData.append('json', JSON.stringify(submission));
-          formData.append('builder', JSON.stringify(builder.components.map(item => item.component)));
-          $.ajax({
-            type : "POST",
-            url : "<?php echo site_url('formulario/guardar')?>",
-            cache: false,
-            processData: false,
-            contentType: false,
-            data : formData,
-            success: (data) => {
-              builder.emit('submitDone', submission);
-            }
-          });
+        builder.on('submit', (datos) => {
+          generateJSON(datos.data, builder.components.map(item => item.component))
+            .then((res) => {
+              const formData = new FormData();
+              formData.append('formio', JSON.stringify(datos));
+              formData.append('formatted', JSON.stringify(res));
+              formData.append('builder', JSON.stringify(builder.components.map(item => item.component)));
+              $.ajax({
+                type : "POST",
+                url : "<?php echo site_url('formulario/guardar')?>",
+                cache: false,
+                processData: false,
+                contentType: false,
+                data : formData,
+                success: (data) => {
+                  builder.emit('submitDone', datos);
+                }
+              });
+            })
         });
       });
       // Formio.createForm(document.getElementById('formio'), 'https://examples.form.io/example');

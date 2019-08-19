@@ -12,9 +12,16 @@ class Formulario extends CI_Controller {
 	{
     $this->load->view('inicio');
   }
-  
   function guardar () {
-    echo($this->input->post('builder'));
+    $data = array();
+    $builder = $this->input->post('builder');
+    $formio = $this->input->post('formio');
+    $formatted = $this->input->post('formatted');
+    $builder = $this->input->post('builder');
+    $data['builder'] = $builder;
+    $data['formio'] = $formio;
+    $data['formatted'] = $formatted;
+    $this->formulario_model->guardar($data);
     // $this->output->enable_profile(); 
   }
 }
