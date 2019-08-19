@@ -12,17 +12,85 @@ class Formulario_model extends CI_Model {
     return $query->result();
   }
 
-  function guardar($builder) {
-    $data = array(
-      'title' => "Formulario demo",
-      'builder' => "Hola"
-    );
-    // $data['builder'] = $builder['builder'];
-    print("data in model BEFORE INSERT:" . json_encode($data));
-    $query = $this->db->insert('form', $data);
-    echo $this->db->_error_message();
-    echo $this->db->last_query();
+ public function listadoFormularios($idformulario = null)
+  {
+      try {
+        if (isset($idformulario)) {
+          $sql = "
+          SELECT * 
+          FROM formulario
+          WHERE id = $idformulario";
+          
+        } else {
+          $sql = "
+          SELECT *
+          FROM formulario";
+        }
+      
+        $consulta = $this->db->query($sql);
+        $listaResultados = $consulta->result();
+        return $listaResultados;
+      } catch (Exception $e) {
+        js_error_div_javascript($e . "<span style='font-size:3.5mm;'>
+                Ocurrio un evento inesperado, intentelo mas tarde.</span>");
+        exit();
+      }
+    
+      return $listaResultados;
+  }
 
-    print($query);
+  public function listadoComponentesFormulario ($idformulario) {
+      try {
+        $sql = "
+          SELECT c.*
+          FROM formulario f
+          INNER JOIN componente c ON c.form_id = f.id
+          WHERE form_id = $idformulario";          
+        $consulta = $this->db->query($sql)->result();
+        return $consulta;
+      } catch (Exception $e) {
+        js_error_div_javascript($e . "<span style='font-size:3.5mm;'>Ocurrio un evento inesperado, intentelo mas tarde.</span>");
+        exit();
+      }
+      return $listaResultados;
+  }
+
+  public function crearFormulario ($formulario) {
+    try {
+      $formulario = array(
+        'nombre' => 'Formuario Nuevo',
+        'descripcion' => 'Descripcion del formulario',
+        'publicado' => false,
+      );
+      $this->db->query("insert into formulario (nombre, descripcion, publicado) values ('Formulario Nuevo', 'Descripcion del formulario', false);");
+      $insert_id = $this->db->insert_id();
+      return  $insert_id;
+    } catch (Exception $e) {
+    } 
+  }
+
+  public function guardar ($idFormulario, $builder) {
+    try {
+      var_dump($idFormulario, $builder);  
+      $this->db->where('form_id', $idFormulario);
+      $this->db->delete('componente');
+      $this->db->query("insert into componente (form_id, builder) values ($idFormulario, '$builder');");
+      echo $this->db->_error_message();
+      echo $this->db->last_query();
+    } catch (Exception $e) {
+      var_dump($e);
+    } 
+  }
+
+  public function borrarFormulario ($idFormulario) {
+    try {
+      $this->db->where('fid_formulario', $idFormulario);
+      $this->db->delete('componente');
+      $this->db->where('id', $idFormulario);
+      $this->db->delete('formulario');
+    } catch (Exception $e) {
+      js_error_div_javascript($e . "<span style='font-size:3.5mm;'>Error al eliminar el formulario.</span>");
+      exit();
+    }
   }
 }

@@ -8,10 +8,35 @@ class Formulario extends CI_Controller {
     $this->load->model('formulario_model');
   }
 
-	public function index()
-	{
-    $this->load->view('inicio');
+  public function index()
+  {
+    $data['formularios'] = $this->formulario_model->listadoFormularios();
+    $this->load->view('inicio', $data);
   }
+
+	public function crear()
+	{
+    $data['idFormulario'] = $this->formulario_model->crearFormulario();
+    $data['formularios'] = $this->formulario_model->listadoFormularios();
+    $data['componentes'] = array();
+    var_dump($data['componentes']);
+    $this->load->view('formularios', $data);
+  }
+
+  public function mostrar($id)
+  {
+    $data['formularios'] = $this->formulario_model->listadoFormularios();
+    $data['idFormulario'] = $id;
+    $builder = $this->formulario_model->listadoComponentesFormulario($id);
+    if (isset($builder[0]->builder)) {
+      $data['componentes'] = $builder[0]->builder;
+    } else {
+      $data['componentes'] = array();
+    }
+    $this->load->view('formularios', $data);
+  }
+
+
   function guardar () {
     $data = array();
     $builder = $this->input->post('builder');
@@ -21,7 +46,10 @@ class Formulario extends CI_Controller {
     $data['builder'] = $builder;
     $data['data'] = $formio;
     $data['formatted'] = $formatted;
-    $this->formulario_model->guardar($data);
+    $dataModificada = json_decode($data['formatted']);
+    $idForm = $dataModificada->form_id;
+    var_dump($idForm);
+    $this->formulario_model->guardar($dataModificada->form_id, $builder);
     // $this->output->enable_profile(); 
   }
 }
