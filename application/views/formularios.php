@@ -58,6 +58,7 @@
     .formio-component-defaultValue,
     .formio-component-readOnlyValue,
     .formio-component-refreshOn,
+    .formio-component-inline,
     .formio-component-clearOnRefresh,
     .formio-component-clearOnRefresh + div,
     .formio-component-clearOnRefresh + div + div,
@@ -246,7 +247,7 @@
       Tooltip: 'Description',
       Conditional: 'Condicionales',
       Logic: 'Logica',
-      Layout: 'Marco',
+      Layout: 'Atributos',
       Date: 'Fecha',
       Time: 'Hora',
       minLength: 'Faltan caracteres para {{field}}',
@@ -278,10 +279,10 @@
         components: []
       }, {
         reandOnly: false,
-        language: 'es',
-        i18n: {
-          'es': espaniol
-        },
+        language: 'en',
+        // i18n: {
+        //   'es': espaniol
+        // },
         builder: {
           basic: false,
           advanced: false,
@@ -309,6 +310,7 @@
                   type: 'textfield',
                   key: 'campo-texto',
                   placeholder: 'Ingrese texto',
+                  defaultValue: '',
                   attributes: {
                     id: 'uno'
                   }
@@ -322,6 +324,7 @@
                   type: 'password',
                   key: 'contrasenia',
                   placeholder: 'Ingrese contraseña',
+                  defaultValue: '',
                   attributes: {
                     id: 'dos'
                   }
@@ -335,6 +338,7 @@
                   type: 'email',
                   key: 'email',
                   placeholder: 'Ingrese un correo electronico',
+                  defaultValue: '',
                   attributes: {
                     id: 'tres'
                   }
@@ -347,7 +351,8 @@
                   label: 'Parrafo',
                   type: 'textarea',
                   key: 'parrafo',
-                  placeholder: 'Ingrese algun parrafo'
+                  placeholder: 'Ingrese algun parrafo',
+                  defaultValue: ''
                 }
               },
               number: {
@@ -357,19 +362,34 @@
                   label: 'Campo numérico',
                   type: 'number',
                   key: 'numerico',
-                  placeholder: 'Valor numérico'
+                  placeholder: 'Valor numérico',
+                  defaultValue: 0
                 }
               },
               dateField: {
                 title: 'Fecha',
                 key: 'fecha',
                 schema: {
-                  label: 'Fecha y hora',
+                  label: 'Fecha',
                   type: 'datetime',
                   key: 'fecha',
-                  // format: 'dd/MM/yyyy',
+                  format: 'dd/MM/yyyy',
                   enableTime: false,
-                  placeholder: 'Ingrese una fecha'
+                  placeholder: 'Ingrese una fecha',
+                  defaultValue: ''
+                }
+              },
+              timeField: {
+                title: 'Hora',
+                key: 'hora',
+                schema: {
+                  label: 'Hora',
+                  type: 'datetime',
+                  key: 'hora',
+                  format: 'hh:mm a',
+                  enableDate: false,
+                  placeholder: 'Ingrese una hora',
+                  defaultValue: ''
                 }
               },
               select: {
@@ -379,7 +399,10 @@
                   label: 'Lista opciones',
                   type: 'select',
                   key: 'select',
-                  placeholder: 'Seleccione una opción'
+                  placeholder: 'Seleccione una opción',
+                  searchEnabled: false,
+                  limit: 1000,
+                  defaultValue: ''
                 }
               },
               radio: {
@@ -388,7 +411,8 @@
                 schema: {
                   label: 'Opciones excluyentes',
                   type: 'radio',
-                  key: 'radio'
+                  key: 'radio',
+                  defaultValue: ''
                 }
               },
               selectboxes: {
@@ -397,7 +421,8 @@
                 schema: {
                   label: 'Selección multiple',
                   type: 'selectboxes',
-                  key: 'seleccion-multiple'
+                  key: 'seleccion-multiple',
+                  defaultValue: ''
                 }
               }
             }
