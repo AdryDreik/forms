@@ -18,7 +18,8 @@ $route['Formularios/eliminar/(:num)'] = "form_dinamico/form_controller/Formulari
 $route['Formularios/guardar/(:num)'] = "form_dinamico/form_controller/Formulario_Ver";
 
 // ----------- FORMULARIOS DINÁMICOS FIN -----------
-
+$route['Formulario/Nuevo'] = "form_dinamico/form_controller/crearFormulario";
+$route['Formulario/Nuevo/Guardar'] = "form_dinamico/form_controller/guardarFormulario";
 
 // Campañas
 
