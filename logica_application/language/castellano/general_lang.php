@@ -16,6 +16,8 @@ $lang["FormularioDinamicoTitulo"] = "Formularios Dinámicos";
 $lang["FormularioDinamicoSubtitulo"] = "Explicación detallada pero puntual de las acciones que el usuario puede realizar. Este texto esta en archivo de lenguaje";
 
 $lang["FormularioDinamicoNuevo"] = "Nuevo Formulario";
+$lang["FormularioDinamicoEdicion"] = "Editar Formulario";
+$lang["FormularioDinamicoInstancia"] = "Ver todas las instancias de cada formulario";
 $lang["FormularioDinamicoNombre"] = "Nombre";
 $lang["FormularioDinamicoDescripcion"] = "Descripcion";
 $lang["FormularioDinamicoPublicado"] = "Publicado";

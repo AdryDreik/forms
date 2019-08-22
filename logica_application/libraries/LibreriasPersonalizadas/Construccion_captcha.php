@@ -21,7 +21,7 @@ class Construccion_captcha   {
         //configuramos el captcha
         $text = $this->_randomText($this->_charNum);
         // Adrian
-        // echo $text;
+        echo $text;
         $conf_captcha = array(
             'word' => $text,
             'img_path' => 'html_public/captcha/',

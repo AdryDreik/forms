@@ -36,6 +36,16 @@ function Ajax_CargarAccion_Editar(codigo) {
                 <?php echo $this->lang->line('FormularioDinamicoNuevo'); ?>
             </span>
         </div>
+        <div align="center" class="BotonesVariasOpciones">
+            <span class="BotonMinimalista" onclick="Ajax_CargarOpcionMenu('Formulario/Edicion')">
+                <?php echo $this->lang->line('FormularioDinamicoEdicion'); ?>
+            </span>
+        </div>
+        <div align="right" class="BotonesVariasOpciones">
+            <span class="BotonMinimalista" onclick="Ajax_CargarOpcionMenu('Formulario/Instancia')">
+                <?php echo $this->lang->line('FormularioDinamicoInstancia'); ?>
+            </span>
+        </div>
         <div id="divErrorBusqueda" class="mensajeBD">
         </div>
     </div>

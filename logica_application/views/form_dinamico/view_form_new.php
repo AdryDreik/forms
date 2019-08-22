@@ -213,6 +213,158 @@
       error: 'Por favor, corrija los siguientes errores antes de enviar.'
     };
     $(document).ready(() => {
+
+      // CREANDO EL COMPONENTE MAPA
+      var BaseComponent = Formio.Components.components.base;
+
+      /**
+       * @param component
+       * @param options
+       * @param data
+       * @constructor
+       */
+      function Maps(component, options, data) {
+        BaseComponent.prototype.constructor.call(this, component, options, data);
+      }
+
+      // Perform typical ES5 inheritance
+      Maps.prototype = Object.create(BaseComponent.prototype);
+      Maps.prototype.constructor = Maps;
+
+      /**
+       * Define what the default JSON schema for this component is. We will derive from the BaseComponent
+       * schema and provide our overrides to that.
+       * @return {*}
+       */
+      Maps.schema = function() {
+        return BaseComponent.schema({
+          type: 'maps',
+          numRows: 3,
+          numCols: 3
+        });
+      };
+
+      /**
+       * Register this component to the Form Builder by providing the "builderInfo" object.
+       * 
+       * @type {{title: string, group: string, icon: string, weight: number, documentation: string, schema: *}}
+       */
+      Maps.builderInfo = {
+        title: 'Check Matrix',
+        group: 'basic',
+        icon: 'fa fa-table',
+        weight: 70,
+        documentation: 'http://help.form.io/userguide/#table',
+        schema: Maps.schema()
+      };
+
+      /**
+       *  Tell the renderer how to build this component using DOM manipulation. 
+       */
+      Maps.prototype.build = function() {
+        this.element = this.ce('div', {
+          class: 'table-responsive'
+        });
+        this.createLabel(this.element);
+
+        var tableClass = 'table ';
+        ['striped', 'bordered', 'hover', 'condensed'].forEach(function(prop) {
+          if (this.component[prop]) {
+            tableClass += `table-${prop} `;
+          }
+        }.bind(this));
+        
+        var table = this.ce('table', {
+          class: tableClass
+        });
+
+        // Build the body.
+        var tbody = this.ce('tbody');
+        this.inputs = [];
+        this.checks = [];
+        for (let i = 0; i < this.component.numRows; i++) {
+          var tr = this.ce('tr');
+          this.checks.push([]);
+          for (let j = 0; j < this.component.numCols; j++) {
+            var td = this.ce('td');
+            this.checks[i][j] = this.ce('input', {
+              type: 'checkbox'
+            });
+            this.addInput(this.checks[i][j], td);
+            tr.appendChild(td);
+          }
+          tbody.appendChild(tr);
+        }
+        table.appendChild(tbody);
+        this.element.appendChild(table);
+      };
+
+      /**
+       * Provide the input element information. Because we are using checkboxes, the change event needs to be 
+       * 'click' instead of the default 'change' from the BaseComponent.
+       * 
+       * @return {{type, component, changeEvent, attr}}
+       */
+      Maps.prototype.elementInfo = function() {
+        const info = BaseComponent.prototype.elementInfo.call(this);
+        info.changeEvent = 'click';
+        return info;
+      };
+
+      /**
+       * Tell the renderer how to "get" a value from this component.
+       * 
+       * @return {Array}
+       */
+      Maps.prototype.getValue = function() {
+        var value = [];
+        for (var rowIndex in this.checks) {
+          var row = this.checks[rowIndex];
+          value[rowIndex] = [];
+          for (var colIndex in row) {
+            var col = row[colIndex];
+            value[rowIndex][colIndex] = !!col.checked;
+          }
+        }
+        return value;
+      };
+
+      /**
+       * Tell the renderer how to "set" the value of this component.
+       * 
+       * @param value
+       * @return {boolean}
+       */
+      Maps.prototype.setValue = function(value) {
+        if (!value) {
+          return;
+        }
+        for (var rowIndex in this.checks) {
+          var row = this.checks[rowIndex];
+          if (!value[rowIndex]) {
+            break;
+          }
+          for (var colIndex in row) {
+            var col = row[colIndex];
+            if (!value[rowIndex][colIndex]) {
+              return false;
+            }
+            let checked = value[rowIndex][colIndex] ? 1 : 0;
+            col.value = checked;
+            col.checked = checked;
+          }
+        }
+      };
+
+      // Use the table component edit form.
+      Maps.editForm = Formio.Components.components.table.editForm;
+
+      // Register the component to the Formio.Components registry.
+      Formio.Components.addComponent('maps', Maps);
+
+      // TERMINA AQUI EL COMPONENTE MAPA
+
+
       globalFormio = Formio.builder(document.getElementById('formio'), {
         components: []
       }, {
@@ -360,6 +512,36 @@
                   label: 'Selección multiple',
                   type: 'selectboxes',
                   key: 'seleccion-multiple',
+                  defaultValue: ''
+                }
+              },
+              firmaElectronica: {
+                title: 'Firma electrónica',
+                key: 'firma-electronica',
+                schema: {
+                  label: 'firma electrónica',
+                  type: 'file',
+                  key: 'firma-electronica',
+                  defaultValue: '',
+                  image: true,
+                  storage: 'base64',
+                  webcam: false,
+                  imageSize: '5MB',
+                  fileTypes: [
+                    {
+                      label: '',
+                      value: ''
+                    }
+                  ]
+                }
+              },
+              mapa: {
+                title: 'Mapa',
+                key: 'mapa',
+                schema: {
+                  label: 'Mapa',
+                  type: 'maps',
+                  key: 'mapa',
                   defaultValue: ''
                 }
               }
