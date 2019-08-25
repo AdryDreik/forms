@@ -51,7 +51,7 @@ class Form_dinamico extends CI_Model
           SELECT c.*
           FROM formulario f
           INNER JOIN componente c ON c.fid_formulario = f.id
-          WHERE id = $idformulario";          
+          WHERE c.id = $idformulario";          
         $consulta = $this->db->query($sql);
         $listaResultados = $consulta->result();
       } catch (Exception $e) {

@@ -23,6 +23,7 @@ class form_controller extends MY_Controller {
       $this->load->model('mfunciones_logica');
       $this->lang->load('general', 'castellano');
       $this->load->library('encrypt');
+      $this->load->model('form_dinamico');    // Capa de Datos
       $this->load->library('FormularioValidaciones/logica_general/Formulario_logica_general');
     }
     
@@ -33,14 +34,7 @@ class form_controller extends MY_Controller {
      * @date 2019
      */
     public function Formulario_Ver() {
-        
-        $this->lang->load('general', 'castellano'); // Archivo de Lenguaje
-        $this->load->model('mfunciones_generales'); // Funciones Generales
-        $this->load->model('mfunciones_logica');    // Capa de Datos
-        $this->load->model('form_dinamico');    // Capa de Datos
-        $data["arrRespuesta"] = "VALORES";
-        // $data["formularios"] = $this->form_dinamico->listadoFormularios();
-        
+        $data["formularios"] = $this->form_dinamico->listadoFormularios();
         $this->load->view('form_dinamico/view_form_main', $data);
     }
 
@@ -60,11 +54,12 @@ class form_controller extends MY_Controller {
     }
 
 
-    public function mostrarFormulario_get ($id) {
-      var_dump($id);
-      $formulario = $this->form_dinamico->listadoFormularios($id);
-      $formulario['componentes'] = $this->form_dinamico->listadoComponentesFormulario($id);
-      $this->response($formulario, 200);
+    public function mostrarFormulario () {
+      $idFormulario = $this->input->post('idFormulario');  
+      $data["formulario"] = $this->form_dinamico->listadoFormularios($idFormulario);
+      $data["componentes"] = $this->form_dinamico->listadoComponentesFormulario($idFormulario);
+      $data["strValidacionJqValidate"] = $this->formulario_logica_general->GeneraValidacionJavaScript();
+      $this->load->view('form_dinamico/view_form_edit', $data);
     }
 
 
@@ -87,10 +82,11 @@ class form_controller extends MY_Controller {
     }
 
 
-    public function borrarFormulario ($id) {
-        $this->form_dinamico->borrarFormulario($id);
-        $respuesta = array('mensaje' => 'Eliminacion Correcta.');
-        $this->response($respuesta, 200);
+    public function Formulario_Borrar () {
+      $idFormulario = $this->input->post('idFormulario');  
+      $this->form_dinamico->borrarFormulario($idFormulario);
+      $data["formularios"] = $this->form_dinamico->listadoFormularios();
+      $this->load->view('form_dinamico/view_form_main', $data);
     }
 }
 ?>

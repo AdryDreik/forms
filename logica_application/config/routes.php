@@ -13,12 +13,15 @@ $route['Formularios/Ver'] = "form_dinamico/form_controller/Formulario_Ver";
 
 $route['Formularios/crear'] = "form_dinamico/form_controller/Formulario_Ver";
 
-$route['Formularios/mostrar/(:num)'] = "form_dinamico/form_controller/mostrarFormulario/$1";
-$route['Formularios/eliminar/(:num)'] = "form_dinamico/form_controller/Formulario_Ver";
-$route['Formularios/guardar/(:num)'] = "form_dinamico/form_controller/Formulario_Ver";
+$route['Formularios/mostrar'] = "form_dinamico/form_controller/mostrarFormulario/$1";
+
+$route['Formularios/eliminar'] = "form_dinamico/form_controller/Formulario_Borrar";
+
+$route['Formularios/guardar'] = "form_dinamico/form_controller/Formulario_Ver";
 
 // ----------- FORMULARIOS DINÁMICOS FIN -----------
 $route['Formulario/Nuevo'] = "form_dinamico/form_controller/crearFormulario";
+
 $route['Formulario/Nuevo/Guardar'] = "form_dinamico/form_controller/guardarFormulario";
 
 // Campañas
