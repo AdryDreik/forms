@@ -40,9 +40,9 @@ class form_controller extends MY_Controller {
 
 
 
-    public function crearFormulario () {
+    public function configurarFormulario () {
       $data["strValidacionJqValidate"] = $this->formulario_logica_general->GeneraValidacionJavaScript();
-      $this->load->view('form_dinamico/view_form_new', $data);
+      $this->load->view('form_dinamico/view_form_settings', $data);
     }
 
     public function guardarFormulario () {

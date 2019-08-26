@@ -53,8 +53,13 @@ function Ajax_CargarAccion_EliminarFormulario(idFormulario) {
         
         <div style="clear: both"></div>
         <div align="left" class="BotonesVariasOpciones">
-            <span class="BotonMinimalista" onclick="Ajax_CargarOpcionMenu('Formulario/Nuevo')">
+            <span class="BotonMinimalista" onclick="Ajax_CargarOpcionMenu('Formulario/configurarFormulario')">
                 <?php echo $this->lang->line('FormularioDinamicoNuevo'); ?>
+            </span>
+        </div>
+        <div align="center" class="BotonesVariasOpciones">
+            <span class="BotonMinimalista" onclick="Ajax_CargarOpcionMenu('Formulario/configurarFormulario')">
+                <?php echo $this->lang->line('FormularioDinamicoEdicion'); ?>
             </span>
         </div>
         <div id="divErrorBusqueda" class="mensajeBD">

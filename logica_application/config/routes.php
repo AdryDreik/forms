@@ -20,7 +20,7 @@ $route['Formularios/eliminar'] = "form_dinamico/form_controller/Formulario_Borra
 $route['Formularios/guardar'] = "form_dinamico/form_controller/Formulario_Ver";
 
 // ----------- FORMULARIOS DINÁMICOS FIN -----------
-$route['Formulario/Nuevo'] = "form_dinamico/form_controller/crearFormulario";
+$route['Formulario/configurarFormulario'] = "form_dinamico/form_controller/configurarFormulario";
 
 $route['Formulario/Nuevo/Guardar'] = "form_dinamico/form_controller/guardarFormulario";
 

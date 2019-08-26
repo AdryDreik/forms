@@ -551,6 +551,10 @@
             {
               key: 'logic',
               ignore: true
+            },
+            {
+              key: 'layout',
+              ignore: true
             }
           ],
           password: [
@@ -564,6 +568,10 @@
             },
             {
               key: 'logic',
+              ignore: true
+            },
+            {
+              key: 'layout',
               ignore: true
             }
           ],
@@ -579,6 +587,10 @@
             {
               key: 'logic',
               ignore: true
+            },
+            {
+              key: 'layout',
+              ignore: true
             }
           ],
           textarea: [
@@ -592,6 +604,10 @@
             },
             {
               key: 'logic',
+              ignore: true
+            },
+            {
+              key: 'layout',
               ignore: true
             }
           ],
@@ -611,6 +627,10 @@
             {
               key: 'logic',
               ignore: true
+            },
+            {
+              key: 'layout',
+              ignore: true
             }
           ],
           number: [
@@ -624,6 +644,10 @@
             },
             {
               key: 'logic',
+              ignore: true
+            },
+            {
+              key: 'layout',
               ignore: true
             }
           ],
@@ -639,6 +663,10 @@
             {
               key: 'logic',
               ignore: true
+            },
+            {
+              key: 'layout',
+              ignore: true
             }
           ],
           radio: [
@@ -653,6 +681,10 @@
             {
               key: 'logic',
               ignore: true
+            },
+            {
+              key: 'layout',
+              ignore: true
             }
           ],
           selectboxes: [
@@ -666,6 +698,28 @@
             },
             {
               key: 'logic',
+              ignore: true
+            },
+            {
+              key: 'layout',
+              ignore: true
+            }
+          ],
+          file: [
+            {
+              key: 'api',
+              ignore: true
+            },
+            {
+              key: 'conditional',
+              ignore: true
+            },
+            {
+              key: 'logic',
+              ignore: true
+            },
+            {
+              key: 'layout',
               ignore: true
             }
           ],
@@ -702,6 +756,10 @@
             },
             {
               key: 'logic',
+              ignore: true
+            },
+            {
+              key: 'layout',
               ignore: true
             }
           ]
