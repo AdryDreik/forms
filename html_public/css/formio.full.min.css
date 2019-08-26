@@ -34,8 +34,11 @@
 .formio-component-template,
 .formio-component-customOptions,
 .formio-component-selectThreshold,
-.formio-component-defaultValue,
 .formio-component-readOnlyValue,
+.formio-component-inputFormat,
+.formio-component-delimiter,
+.formio-component-decimalLimit,
+.formio-component-requireDecimal,
 .formio-component-refreshOn,
 .formio-component-inline,
 .formio-component-clearOnRefresh,
@@ -5551,7 +5554,8 @@ td .formio-component-modaledit .formio-modaledit-view-container {
 .formbuilder .formio-component-html {
   padding: 10px;
   min-height: 26px;
-  border: dotted 2px #e8e8e8
+  border: dotted 2px #e8e8e8;
+  height: 100vh;
 }
 
 .formbuilder .drag-container:hover {

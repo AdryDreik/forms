@@ -27,6 +27,9 @@
         <script type="text/javascript"src="html_public/js/lib/formio.full.min.js"></script>
         <link rel="stylesheet" href="html_public/css/formio.full.min.css">
         <link rel="stylesheet" href="html_public/css/bootstrap.min.css">
+
+        <link rel="stylesheet" href="html_public/css/leaflet.css">
+        <script type="text/javascript"src="html_public/js/lib/leaflet.js"></script>
         <!-- TERMINA AQUI -->
         <link rel="stylesheet" type="text/css"
               href="html_public/js/lib/themes/base/jquery.ui.all.css" />

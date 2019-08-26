@@ -250,7 +250,7 @@
        * @type {{title: string, group: string, icon: string, weight: number, documentation: string, schema: *}}
        */
       Maps.builderInfo = {
-        title: 'Check Matrix',
+        title: 'Maps',
         group: 'basic',
         icon: 'fa fa-table',
         weight: 70,
@@ -262,41 +262,27 @@
        *  Tell the renderer how to build this component using DOM manipulation. 
        */
       Maps.prototype.build = function() {
-        this.element = this.ce('div', {
-          class: 'table-responsive'
-        });
+        this.element = this.ce('div');
         this.createLabel(this.element);
 
-        var tableClass = 'table ';
-        ['striped', 'bordered', 'hover', 'condensed'].forEach(function(prop) {
-          if (this.component[prop]) {
-            tableClass += `table-${prop} `;
-          }
-        }.bind(this));
-        
-        var table = this.ce('table', {
-          class: tableClass
+        // Creando el component mapa con leaflet
+        var map = this.ce('div', {
+          id: 'miMapa',
+          style: 'width: 600px; height: 400px;'
         });
+        
+        document.getElementById('formio').appendChild(map);
 
-        // Build the body.
-        var tbody = this.ce('tbody');
-        this.inputs = [];
-        this.checks = [];
-        for (let i = 0; i < this.component.numRows; i++) {
-          var tr = this.ce('tr');
-          this.checks.push([]);
-          for (let j = 0; j < this.component.numCols; j++) {
-            var td = this.ce('td');
-            this.checks[i][j] = this.ce('input', {
-              type: 'checkbox'
-            });
-            this.addInput(this.checks[i][j], td);
-            tr.appendChild(td);
-          }
-          tbody.appendChild(tr);
-        }
-        table.appendChild(tbody);
-        this.element.appendChild(table);
+        var mymap = L.map('miMapa').setView([51.505, -0.09], 13);
+
+        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+          maxZoom: 18,
+          attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+            '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+            'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+          id: 'mapbox.streets'
+        }).addTo(mymap);
+        this.element.appendChild(map);
       };
 
       /**
@@ -559,10 +545,6 @@
               ignore: true
             },
             {
-              key: 'data',
-              ignore: true
-            },
-            {
               key: 'conditional',
               ignore: true
             },
@@ -577,10 +559,6 @@
               ignore: true
             },
             {
-              key: 'data',
-              ignore: true
-            },
-            {
               key: 'conditional',
               ignore: true
             },
@@ -592,10 +570,6 @@
           email: [
             {
               key: 'api',
-              ignore: true
-            },
-            {
-              key: 'data',
               ignore: true
             },
             {
@@ -610,28 +584,6 @@
           textarea: [
             {
               key: 'api',
-              ignore: true
-            },
-            {
-              key: 'data',
-              ignore: true
-            },
-            {
-              key: 'conditional',
-              ignore: true
-            },
-            {
-              key: 'logic',
-              ignore: true
-            }
-          ],
-          email: [
-            {
-              key: 'api',
-              ignore: true
-            },
-            {
-              key: 'data',
               ignore: true
             },
             {
@@ -667,10 +619,6 @@
               ignore: true
             },
             {
-              key: 'data',
-              ignore: true
-            },
-            {
               key: 'conditional',
               ignore: true
             },
@@ -682,10 +630,6 @@
           datetime: [
             {
               key: 'api',
-              ignore: true
-            },
-            {
-              key: 'data',
               ignore: true
             },
             {
@@ -703,10 +647,6 @@
               ignore: true
             },
             {
-              key: 'data',
-              ignore: true
-            },
-            {
               key: 'conditional',
               ignore: true
             },
@@ -718,10 +658,6 @@
           selectboxes: [
             {
               key: 'api',
-              ignore: true
-            },
-            {
-              key: 'data',
               ignore: true
             },
             {
